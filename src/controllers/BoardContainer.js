@@ -181,6 +181,10 @@ class BoardContainer extends Component {
             groupName={this.groupName}>
             {reducerData.lanes.map((lane, index) => {
               const {id, droppable, ...otherProps} = lane
+              let laneDrag = laneDraggable
+              if (lane.draggable !== undefined) {
+                laneDrag = lane.draggable
+              }
               const laneToRender = (
                 <Lane
                   key={id}
@@ -198,7 +202,7 @@ class BoardContainer extends Component {
                   {...passthroughProps}
                 />
               )
-              return draggable && laneDraggable ? <Draggable key={lane.id}>{laneToRender}</Draggable> : laneToRender
+              return draggable && laneDrag ? <Draggable key={lane.id}>{laneToRender}</Draggable> : laneToRender
             })}
           </Container>
         </PopoverWrapper>
